@@ -23,10 +23,4 @@ app.get('/', (req,res)=>{
 
 app.use('/api/task', taskRoutes);
 
-// app.use(cors({
-//     origin: 'http://localhost:5175'
-// }));
-
-// app.options('/api/task/:id', cors()); 
-
 app.listen(process.env.PORT || 5000, () => console.log('Server running on port http://localhost:5000'));

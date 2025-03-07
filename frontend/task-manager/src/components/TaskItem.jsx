@@ -6,6 +6,7 @@ import {useParams} from 'react-router-dom';
 function TaskItem(){
     const [task, setTask] = useState(null);
     const {id} = useParams();
+    const apiURL = import.meta.env.VITE_API_BASE_URL;
 
     useEffect(()=>{
         fetchTask();
@@ -13,7 +14,7 @@ function TaskItem(){
 
     const fetchTask = async () => {
         try{
-            const response = await axios.get(`http://localhost:5000/api/task/${id}`);
+            const response = await axios.get(`${apiURL}/${id}`);
             setTask(response.data);
         } catch(error){
             console.error("Error fetching Task:", error);

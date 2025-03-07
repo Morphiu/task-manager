@@ -3,7 +3,9 @@ import axios from 'axios';
 import {useNavigate, useParams} from 'react-router-dom';
 
 // Adding or updating tasks
+
 function TaskForm(){
+    const apiURL = import.meta.env.VITE_API_BASE_URL;
     const [task, setTask] = useState({title:'', description:'', status:'pending', dueDate:'' });
     const navigate = useNavigate();
     const {id} = useParams();
@@ -16,7 +18,7 @@ function TaskForm(){
 
     const fetchTask = async () =>{
         try{
-            const response = await axios.get(`http://localhost:5000/api/task/${id}`);
+            const response = await axios.get(`${apiURL}/${id}`);
             setTask(response.data);
         } catch (error){
             console.error("Error fetching task: ", error);
@@ -31,9 +33,9 @@ function TaskForm(){
         e.preventDefault();
         try{
             if(id){
-                await axios.put(`http://localhost:5000/api/task/${id}`, task);
+                await axios.put(`${apiURL}/${id}`, task);
             }else{
-                await axios.post(`http://localhost:5000/api/task`, task);
+                await axios.post(`${apiURL}`, task);
             }
             navigate(`/`);
         } catch(error){

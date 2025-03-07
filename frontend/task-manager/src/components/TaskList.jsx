@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 // Displaying all tasks
 function TaskList(){
     const [tasks, setTasks] = useState([]);
+    const apiURL = import.meta.env.VITE_API_BASE_URL;
 
     useEffect (()=>{
         fetchTask();
@@ -12,7 +13,7 @@ function TaskList(){
 
     const fetchTask= async () =>{
         try{
-            const response = await axios.get(`http://localhost:5000/api/task`);
+            const response = await axios.get(`${apiURL}`);
             setTasks(response.data);
             console.log(response.data)
         } catch(error){
@@ -24,7 +25,7 @@ function TaskList(){
 // Deleting a task
     const handleDelete = async (id) =>{
         try{
-            await axios.delete(`http://localhost:5000/api/task/${id}`);
+            await axios.delete(`${apiURL}/${id}`);
             fetchTask();
         } catch(error){
             console.error('Error deleting task:', error);
